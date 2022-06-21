@@ -30,12 +30,6 @@ while IFS=, read -r address amount; do
 	RECIPIENT=$address
 	TOTAL=$amount
 	SIMPLE_TOTAL=$(cast --to-unit "$amount" ether)
-	START=10000 # To write
-	DURATION=6 # To write
-	CLIFF_DURATION=0
-	MANAGER=$MANAGER_ADDRESS
-	RESTRICTED=true
-	BLESSED=true
 
 	# From DssVest.sol
 	# @param _usr The recipient of the reward
