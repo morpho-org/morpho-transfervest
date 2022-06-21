@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # fail immediately if a command fails
 set -eo pipefail
 
@@ -25,7 +24,7 @@ SIGNER=$2
 # @param _mgr An optional manager for the contract. Can yank if vesting ends prematurely.
 # @param _res Whether the vesting can be claimed by the usr only
 # @param _hly Whether the vesting is uninterruptible
-SIG="create_custom(address,uint256,uint256,uint256,uint256,address,bool,bool)"x
+SIG="create_custom(address,uint256,uint256,uint256,uint256,address,bool,bool)"
 
 echo "Vester" "$VESTER"
 echo "Signer" "$SIGNER"
