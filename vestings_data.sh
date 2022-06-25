@@ -28,8 +28,7 @@ while IFS=, read -r address amount; do
 	echo "New Vesting"
 
 	RECIPIENT=$address
-	TOTAL=$amount
-	SIMPLE_TOTAL=$(cast --to-unit "$amount" ether)
+	TOTAL="${amount%%[[:cntrl:]]}" # Cut the last pattern in csv
 
 	# From DssVest.sol
 	# @param _usr The recipient of the reward
@@ -44,7 +43,7 @@ while IFS=, read -r address amount; do
 
 	echo "Arguments:"
 	echo "Recipient      (usr) $RECIPIENT"
-	echo "Total reward   (tot) $TOTAL ($SIMPLE_TOTAL tokens)"
+	echo "Total reward   (tot) $TOTAL ($amount tokens)"
 	echo "Start ts       (bgn) $START"
 	echo "Vest duration  (tau) $DURATION"
 	echo "Cliff duration (eta) $CLIFF_DURATION"
