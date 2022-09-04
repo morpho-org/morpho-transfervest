@@ -6,7 +6,7 @@ import "./Vester.sol";
 interface IMectSwapApprover {
     function approvals(address) external returns (bool);
 
-	function setApproval(bool _approval) external;
+    function setApproval(bool _approval) external;
 }
 
 contract VestingCreator {
