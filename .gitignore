@@ -4,3 +4,5 @@ broadcast/
 
 .env
 vestings_raw_data.csv
+
+*.ansi
