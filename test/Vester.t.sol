@@ -37,9 +37,10 @@ contract VesterTest is Test {
         token.mint($owner, SUPPLY); // Mint 1B tokens to owner.
         token.approve($vester, SUPPLY); // Allow vester to spend tokens.
 
-        // TWENTY_YEARS is needed here to avoid underflow on DssVest contract.
-        bgn = block.timestamp + vester.TWENTY_YEARS() + 100;
+        // Increase time by TWENTY_YEARS to avoid underflow on DssVest contract because of the following line in the `_create` function:
+        // require(_bgn > sub(block.timestamp, TWENTY_YEARS), "DssVest/bgn-too-long-ago");
         vm.warp(block.timestamp + vester.TWENTY_YEARS());
+        bgn = block.timestamp + 100;
         vester.file("cap", type(uint256).max);
     }
 
