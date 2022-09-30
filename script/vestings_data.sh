@@ -21,37 +21,42 @@ echo "Vester" "$VESTER"
 echo "Signer" "$SIGNER"
 
 echo "Clear csv file"
-> vestings_calldata.csv
+> ./data/vestings_calldata.csv
 
-while IFS=, read -r recipient amount manager blessed; do
+while IFS=, read -r recipient amount beginning manager blessed; do
 
 	echo "New Vesting"
 
 	RECIPIENT=$recipient
 	TOTAL=$amount
+	BEGINNING=$beginning
 	MANAGER=$manager
 	BLESSED=$blessed
 
 	# From DssVest.sol
-	# @param _usr The recipient of the reward
-	# @param _tot The total amount of the vest
+	# @param _usr The recipient of the reward.
+	# @param _tot The total amount of the vest.
+	# @param _bgn The start of the vesting period.
 	# @param _mgr An optional manager for the contract. Can yank if vesting ends prematurely.
-	# @param _bls Whether the vesting is uninterruptible
-	SIG="createVesting(address,uint256,address,bool)"
+	# @param _bls Whether the vesting is uninterruptible or not (True = uninterruptible).
+	SIG="createVesting(address,uint256,uint256,address,bool)"
 
 	echo "Arguments:"
 	echo "Recipient      (usr) $RECIPIENT"
 	echo "Total reward   (tot) $TOTAL tokens"
+	echo "Beginning      (bgn) $BEGINNING"
 	echo "Manager        (mgr) $MANAGER"
 	echo "Blessed        (bls) $BLESSED"
 
 	echo ""
 	echo "Save calldata..."
-	cast calldata $SIG $RECIPIENT $TOTAL $MANAGER $BLESSED --from $SIGNER >> vestings_calldata.csv
+	cast calldata $SIG $RECIPIENT $TOTAL $BEGINNING $MANAGER $BLESSED --from $SIGNER >> vestings_calldata.csv
 	echo "Saved"
 
 	# echo ""
 	# echo "Call result:"
-	# cast call $VESTER $SIG $RECIPIENT $TOTAL $MANAGER $BLESSED --from $SIGNER
+	# cast call $VESTER $SIG $RECIPIENT $TOTAL $BEGINNING $MANAGER $BLESSED --from $SIGNER
 
-done < vesting_params_example.csv
+	echo ""
+
+done < ./data/vestings_params_example.csv
