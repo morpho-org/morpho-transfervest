@@ -3,7 +3,7 @@ out/
 broadcast/
 
 .env
-vestings_raw_data.csv
-vesting_params.csv
+vestings_calldata.csv
+vestings_params.csv
 
 *.ansi
