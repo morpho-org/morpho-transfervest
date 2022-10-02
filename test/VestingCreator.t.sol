@@ -13,6 +13,7 @@ contract VestingCreatorTest is Test {
     address constant MORPHO_DAO = 0xcBa28b38103307Ec8dA98377ffF9816C164f9AFa;
     address constant MORPHO_LABS = 0x1590e7F4c3E1B4493Abb462e34593aef3A9397Dd;
     address constant ADMO = 0x6ABfd6139c7C3CC270ee2Ce132E309F59cAaF6a2;
+    uint256 constant BEGINNING = 1671886800;
 
     Vester vester;
     VestingCreator vestingCreator;
@@ -33,7 +34,7 @@ contract VestingCreatorTest is Test {
         MECT_SWAP_APPROVER.setApproval(true);
 
         vm.prank(MORPHO_DAO);
-        vestingCreator.createVesting(vm.addr(1), 1, MORPHO_LABS, true);
+        vestingCreator.createVesting(vm.addr(1), 1, BEGINNING, MORPHO_LABS, true);
     }
 
     function testCreateVesting() public {
@@ -46,13 +47,13 @@ contract VestingCreatorTest is Test {
             MECT_SWAP_APPROVER.setApproval(true);
 
             vm.prank(MORPHO_DAO);
-            uint256 id = vestingCreator.createVesting(user, 1, MORPHO_LABS, true);
+            uint256 id = vestingCreator.createVesting(user, 1, BEGINNING, MORPHO_LABS, true);
             console.log("id: ", id);
 
             assertEq(vester.usr(id), user, "usr");
-            assertEq(vester.bgn(id), vestingCreator.BEGINNING(), "bgn");
-            assertEq(vester.clf(id), vestingCreator.BEGINNING() + vestingCreator.CLIFF(), "clf");
-            assertEq(vester.fin(id), vestingCreator.BEGINNING() + vestingCreator.DURATION(), "fin");
+            assertEq(vester.bgn(id), BEGINNING, "bgn");
+            assertEq(vester.clf(id), BEGINNING + vestingCreator.CLIFF(), "clf");
+            assertEq(vester.fin(id), BEGINNING + vestingCreator.DURATION(), "fin");
             assertEq(vester.mgr(id), MORPHO_LABS, "mgr");
             assertEq(vester.res(id), 0, "res");
             assertEq(vester.tot(id), 1, "tot");
