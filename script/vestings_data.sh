@@ -50,7 +50,7 @@ while IFS=, read -r recipient amount beginning manager blessed; do
 
 	echo ""
 	echo "Save calldata..."
-	cast calldata $SIG $RECIPIENT $TOTAL $BEGINNING $MANAGER $BLESSED --from $SIGNER >> vestings_calldata.csv
+	cast calldata $SIG $RECIPIENT $TOTAL $BEGINNING $MANAGER $BLESSED --from $SIGNER >> ./data/vestings_calldata.csv
 	echo "Saved"
 
 	# echo ""
