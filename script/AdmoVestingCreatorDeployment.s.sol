@@ -7,7 +7,7 @@ import "forge-std/console.sol";
 import {VestingCreator} from "src/VestingCreator.sol";
 
 contract AdmoVestingCreatorDeployment is Script {
-    address public constant ADMO_VESTER = 0x6ABfd6139c7C3CC270ee2Ce132E309F59cAaF6a2;
+    address public constant ADMO_VESTER = 0x60167C23eECe006dF7aDB048AeC4b4558957eB5A;
 
     function setUp() public {}
 
